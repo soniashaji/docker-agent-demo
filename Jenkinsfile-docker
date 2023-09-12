@@ -2,7 +2,7 @@ pipeline{
     agent {
         docker {
             image 'ubuntu'
-            label 'ssh'
+            label 'sshagent'
             args '-v /var/run/docker.sock:/var/run/docker.sock -u root'
         }
     }
@@ -15,24 +15,24 @@ pipeline{
                 sh 'apt-get install openjdk-17-jdk -y'
                 sh 'java -version'
                 sh 'apt-get install wget -y'
-                sh 'wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz'
-                sh 'tar -xvf apache-maven-3.6.3-bin.tar.gz'
-                sh 'mv apache-maven-3.6.3 /opt/'
-                sh 'export PATH=/opt/apache-maven-3.6.3/bin:${PATH}'
+                sh 'wget https://mirrors.estointernet.in/apache/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz'
+                sh 'tar -xvf apache-maven-3.9.4-bin.tar.gz'
+                sh 'mv apache-maven-3.9.4 /opt/'
+                sh 'export PATH=/opt/apache-maven-3.9.4/bin:${PATH}'
                 sh 'ls /opt'
-                sh 'ls /opt/apache-maven-3.6.3'
-                sh '/opt/apache-maven-3.6.3/bin/mvn -version'
+                sh 'ls /opt/apache-maven-3.9.4'
+                sh '/opt/apache-maven-3.9.4/bin/mvn -version'
             }
         }
         stage('Checkout'){
             steps{
-                checkout poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vcjain/docker-agent-demo.git']])
+                checkout poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/soniashaji/docker-agent-demo.git']])
             }
         }
         stage('Build'){
             steps{
                 echo "Build Stage is in progress "
-                sh '/opt/apache-maven-3.6.3/bin/mvn compile'
+                sh '/opt/apache-maven-3.9.4/bin/mvn compile'
             }
         }
     }
