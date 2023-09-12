@@ -1,18 +1,18 @@
 pipeline {
     
    agent {
-        label 'ssh'
+        label 'javaagent'
     }
 
     tools {
-      maven 'maven3'
+      maven 'maven-3.9'
     }
     
     
     stages{
         stage ('Checkout') {
             steps{
-                checkout poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vcjain/docker-agent-demo.git']])
+                checkout poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/soniashaji/docker-agent-demo.git']])
             }
             
         }
