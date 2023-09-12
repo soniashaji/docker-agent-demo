@@ -15,7 +15,7 @@ pipeline{
                 sh 'apt-get install openjdk-17-jdk -y'
                 sh 'java -version'
                 sh 'apt-get install wget -y'
-                sh 'wget https://mirrors.estointernet.in/apache/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz'
+                sh 'wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz'
                 sh 'tar -xvf apache-maven-3.9.4-bin.tar.gz'
                 sh 'mv apache-maven-3.9.4 /opt/'
                 sh 'export PATH=/opt/apache-maven-3.9.4/bin:${PATH}'
