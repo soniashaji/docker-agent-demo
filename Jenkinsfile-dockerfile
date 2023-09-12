@@ -3,19 +3,19 @@ pipeline{
         dockerfile {
             dir '.'
             filename 'Dockerfile-agent'
-            label 'ssh'
+            label 'sshagent'
         }
     }
     stages{
         stage('Checkout'){
             steps{
-                checkout poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vcjain/docker-agent-demo.git']])
+                checkout poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/soniashaji/docker-agent-demo.git']])
             }
         }
         stage('Build'){
             steps{
                 echo "Build Stage is in progress "
-                sh '/opt/apache-maven-3.6.3/bin/mvn compile'
+                sh '/opt/apache-maven-3.9.4/bin/mvn compile'
             }
         }
     }
